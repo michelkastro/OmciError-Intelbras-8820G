@@ -29,13 +29,13 @@ Como o terminal da OLT pode ser configurado, verifique o inicio do terminal na s
 
 /usr/local/etc/OmciErrorIntelbras.sh -> arquivo shell
 
-10.10.10.1 -> ip da OLT 8820G - pode ser usada multiplas 10.10.10.1-10.10.10.2-10.10.10.3
+"10.10.10.1" -> ip da OLT 8820G - pode ser usada multiplas "10.10.10.1-10.10.10.2-10.10.10.3"
 
-usuario -> login usuário da OTL
+"usuario" -> login usuário da OTL
 
-senha -> senha do usuário da OLT
+"senha" -> senha do usuário da OLT
 
-shell -> exemplo iSH>
+"shell" -> exemplo "iSH>"
 
 ```
 Obs: Script criado por necessidade.  
