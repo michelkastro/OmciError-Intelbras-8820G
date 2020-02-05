@@ -3,10 +3,6 @@
 #e-mail: michelfdecastro@gmail.com
 #https://github.com/michelkastro/OmciError-Intelbras-8820G
 
-olt=$1
-user=$2
-senha=$3
-shel=$4
 
 if [ -z ${1} ] || [ -z ${2} ] || [ -z ${3} ] || [ -z ${4} ]; then
 	echo "Por favor, informe corretamente todos os dados..."
