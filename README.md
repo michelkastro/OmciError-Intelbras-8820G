@@ -1,4 +1,4 @@
-# Script para identificar e ressincronizar ONU com status Omcierror na OLT intelbras 8820G
+# Script para identificar e ressincronizar ONU com status OmciError na OLT intelbras 8820G
 #### Desenvolvido por Michel Fernando de Castro ####
 _doações_ [paypal](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=lucianemoreira%40hotmail%2ecom&lc=BR&no_note=0&currency_code=BRL&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest).
 
