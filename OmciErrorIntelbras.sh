@@ -16,6 +16,7 @@ hosts=($olts)
 user=$2
 pass=$3
 cmd=$4
+data=$(date +%d/%m/%Y-%T)
 
 conectOlt()
 {
@@ -81,13 +82,13 @@ do
       if [ -z "$ONU" ]
             then
                   echo "Não foram encontradas ONU com status OmciError"
-		logger -s "Sem OmciError $u" 2>> /var/log/OmciError.log
+		logger -s "Sem OmciError $u $data" 2>> /var/log/OmciError.log
             else
                   while IFS= read -r line
                   do
                         echo "Efetuando resync na ONU " $line
                         resyncOnu $line
-                        logger -s "Resync Onu $line na OLT $u" 2>> /var/log/OmciError.log
+                        logger -s "Resync Onu $line na OLT $u $data" 2>> /var/log/OmciError.log
 
                   done < <(printf '%s\n' "$ONU")
       fi
