@@ -59,46 +59,33 @@ ONUERROR=$(
             ")
 }
 
-for u in "${hosts[@]}"
-do
-echo "Efetuando buscas na OLT $u com OmciError 2m30s aprox"
+echo "Salvando os dados..."
 
 conectOlt $u
 
-ONU=$(
-while IFS= read -r line
-do
-   Omci=$(echo $line) 
+echo "$CONNECT" > /tmp/onu-$hosts
 
-      OmciError=$( echo $Omci | sed -n '/OmciError/p' |  awk '{print $3}' | sed 's/\-/\//g' | cut -c 3-10 | tr -d ' ')
+sed -n '/OmciError/p' /tmp/onu-$hosts > /tmp/onu-2$hosts
 
-   if [ ! -z "$OmciError" ]
-      then
-            echo $OmciError 
-      fi
- done < <(printf '%s\n' "$CONNECT")
-)
+awk '{print $3}' /tmp/onu-2$hosts > /tmp/onu-3$hosts
 
-      if [ -z "$ONU" ]
+sed 's/\-/\//g' /tmp/onu-3$hosts > /tmp/onu-4$hosts
+
+onuerror=$(cat /tmp/onu-4$hosts)
+
+        if [ -z "$onuerror" ]
             then
-                  echo "Não foram encontradas ONU com status OmciError"
-		logger -s "Sem OmciError $u $data" 2>> /var/log/OmciError.log
+                echo "Não foram encontradas ONU com status OmciError"
+		logger -s "Sem OmciError $u" 2>> /var/log/OmciError.log
+                rm /tmp/onu-*$hosts
             else
-                  while IFS= read -r line
-                  do
-                        echo "Efetuando resync na ONU " $line
-                        resyncOnu $line
-                        logger -s "Resync Onu $line na OLT $u $data" 2>> /var/log/OmciError.log
+                 while read p; do
 
-                  done < <(printf '%s\n' "$ONU")
-      fi
-
+                onuchek=$(echo "$p" | cut -c 3-10)
+                echo "Efetuando o resync na onu $onuchek"
+                        resyncOnu $onuchek
+                        logger -s "Resync Onu $onuchek na OLT $u" 2>> /var/log/OmciError.log
+                done </tmp/onu-4$hosts
+        fi
+rm /tmp/onu-*$hosts
 done
-
-
-    
-
-
-
-
-
